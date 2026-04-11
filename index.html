@@ -918,8 +918,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <label class="size-label">Select Size & Serving:</label>
 <select class="size-dropdown" data-name="Special Paneer Pizza" onchange="updatePizza(this)">
 <option value="149" data-size="Regular - 1 Person">Regular - ₹149 (1 Person)</option>
-<option value="220" data-size="Medium - 2 Persons">Medium - ₹220 (2 Persons)</option>
-<option value="280" data-size="Large - 3 Persons">Large - ₹280 (3 Persons)</option>
+<option value="220" data-size="Medium - 2 Persons">Medium - ₹250 (2 Persons)</option>
+<option value="280" data-size="Large - 3 Persons">Large - ₹330 (3 Persons)</option>
 </select>
 <p class="price">₹149</p>
 <div class="btn-group">
@@ -1070,38 +1070,6 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 </div>
 </div>
 
-<!-- Thums Up -->
-<div class="food-card">
-<div class="card-image-wrap">
-<img src="https://rukminim2.flixcart.com/image/1229/1229/xif0q/aerated-drink/o/t/v/-original-imagsw2bhz8m6xkk.jpeg?q=90" alt="Thums Up Soft Drink" loading="lazy">
-<span class="food-tag drink">Drink</span>
-</div>
-<div class="card-body">
-<h3>Thums Up Soft Drink</h3>
-<p class="price">₹45 <span style="font-size: 14px; color: #555; font-weight: normal;">(600ml - Chilled)</span></p>
-<div class="btn-group">
-<button class="order-btn cart-btn" onclick="addToCart('Thums Up 750ml', 45)">Add to Cart</button>
-<a href="https://wa.me/917061632122?text=I want to order Chilled Thums Up (750ml)%0AName:%0AAddress:%0APrice-45" class="order-btn wa-btn">Order on WhatsApp</a>
-</div>
-</div>
-</div>
-
-<!-- Sting Energy Drink -->
-<div class="food-card">
-<div class="card-image-wrap">
-<img src="https://www.bbassets.com/media/uploads/p/l/40113908_5-sting-energy-drink.jpg" alt="Sting Energy Drink" loading="lazy">
-<span class="food-tag drink">Drink</span>
-</div>
-<div class="card-body">
-<h3>Sting Energy Drink</h3>
-<p class="price">₹25 <span style="font-size: 14px; color: #555; font-weight: normal;">(250ml - Chilled)</span></p>
-<div class="btn-group">
-<button class="order-btn cart-btn" onclick="addToCart('Sting Energy Drink', 25)">Add to Cart</button>
-<a href="https://wa.me/917061632122?text=I want to order Sting Energy Drink (250ml)%0AName:%0AAddress:%0APrice-25" class="order-btn wa-btn">Order on WhatsApp</a>
-</div>
-</div>
-</div>
-
 <!-- Veg Burger -->
 <div class="food-card">
 <div class="card-image-wrap">
@@ -1236,12 +1204,12 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <div class="card-body">
 <h3>Chowmein</h3>
 <p class="price">
- <span class="half">₹40 (Half Plate)</span><br>
- <span class="full">₹80 (Full Plate)</span>
+ <span class="half">₹50 (Half Plate)</span><br>
+ <span class="full">₹90 (Full Plate)</span>
 </p>
 <select id="chowmein-option" class="select-option">
-<option value="40">Half Plate - ₹40</option>
-<option value="80">Full Plate - ₹80</option>
+<option value="50">Half Plate - ₹50</option>
+<option value="90">Full Plate - ₹90</option>
 </select>
 <div class="btn-group">
 <button class="order-btn cart-btn" onclick="addToCartWithOption('Chowmein','chowmein-option')">Add to Cart</button>
