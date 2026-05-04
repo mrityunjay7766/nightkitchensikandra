@@ -877,7 +877,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 </style>
 
-<div class="food-card disabled-card">
+<!-- Corn Pizza -->
+<div class="food-card">
 <div class="card-image-wrap">
 <img src="https://i.postimg.cc/rpMTrTx4/Screenshot-2026-04-14-141443.png" alt="Corn Pizza" loading="lazy">
 <span class="food-tag veg">Veg</span>
@@ -885,18 +886,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="card-body">
 <h3>Corn Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
-<select class="size-dropdown" disabled>
-<option>Out of Stock</option>
+<select class="size-dropdown" data-name="Corn Pizza" onchange="updatePizza(this)">
+<option value="139" data-size="Regular - 1 Person">Regular - ₹139 (1 Person)</option>
+<option value="199" data-size="Medium - 2 Persons">Medium - ₹199 (2 Persons)</option>
+<option value="290" data-size="Large - 3 Persons">Large - ₹290 (3 Persons)</option>
 </select>
 <p class="price">₹139</p>
 <div class="btn-group">
-<button class="order-btn cart-btn btn-disabled" disabled>Sold Out</button>
-<button class="order-btn wa-btn btn-disabled" disabled>Out of Stock</button>
+<button class="order-btn cart-btn" onclick="addToCart('Corn Pizza (Regular - 1 Person)',139)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Corn Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-139">Order on WhatsApp</a>
 </div>
 </div>
 </div>
 
-<div class="food-card disabled-card">
+<!-- Mexican Green Wave Pizza -->
+<div class="food-card">
 <div class="card-image-wrap">
 <img src="https://i.postimg.cc/sx1dQghf/Whats-App-Image-2026-03-08-at-12-29-40.jpg" alt="Mexican Green Wave Pizza" loading="lazy">
 <span class="food-tag veg">Veg</span>
@@ -904,18 +908,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="card-body">
 <h3>Mexican Green Wave Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
-<select class="size-dropdown" disabled>
-<option>Out of Stock</option>
+<select class="size-dropdown" data-name="Mexican Green Wave Pizza" onchange="updatePizza(this)">
+<option value="179" data-size="Regular - 1 Person">Regular - ₹179 (1 Person)</option>
+<option value="240" data-size="Medium - 2 Persons">Medium - ₹240 (2 Persons)</option>
+<option value="310" data-size="Large - 3 Persons">Large - ₹310 (3 Persons)</option>
 </select>
 <p class="price">₹179</p>
 <div class="btn-group">
-<button class="order-btn cart-btn btn-disabled" disabled>Sold Out</button>
-<button class="order-btn wa-btn btn-disabled" disabled>Out of Stock</button>
+<button class="order-btn cart-btn" onclick="addToCart('Mexican Green Wave Pizza (Regular - 1 Person)',179)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Mexican Green Wave Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-179">Order on WhatsApp</a>
 </div>
 </div>
 </div>
 
-<div class="food-card disabled-card">
+<!-- Special Paneer Pizza -->
+<div class="food-card">
 <div class="card-image-wrap">
 <img src="https://i.postimg.cc/xCh6Rn7K/pizza.avif" alt="Special Paneer Pizza" loading="lazy">
 <span class="food-tag veg">Veg</span>
@@ -923,18 +930,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="card-body">
 <h3>Special Paneer Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
-<select class="size-dropdown" disabled>
-<option>Out of Stock</option>
+<select class="size-dropdown" data-name="Special Paneer Pizza" onchange="updatePizza(this)">
+<option value="149" data-size="Regular - 1 Person">Regular - ₹149 (1 Person)</option>
+<option value="250" data-size="Medium - 2 Persons">Medium - ₹250 (2 Persons)</option>
+<option value="330" data-size="Large - 3 Persons">Large - ₹330 (3 Persons)</option>
 </select>
 <p class="price">₹149</p>
 <div class="btn-group">
-<button class="order-btn cart-btn btn-disabled" disabled>Sold Out</button>
-<button class="order-btn wa-btn btn-disabled" disabled>Out of Stock</button>
+<button class="order-btn cart-btn" onclick="addToCart('Special Paneer Pizza (Regular - 1 Person)',149)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Special Paneer Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-149">Order on WhatsApp</a>
 </div>
 </div>
 </div>
 
-<div class="food-card disabled-card">
+<!-- Peppy Paneer Pizza -->
+<div class="food-card">
 <div class="card-image-wrap">
 <img src="https://i.postimg.cc/7YCw1VN6/Whats-App-Image-2026-03-02-at-20-57-56.jpg" alt="Peppy Paneer Pizza" loading="lazy">
 <span class="food-tag veg">Veg</span>
@@ -942,18 +952,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="card-body">
 <h3>Peppy Paneer Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
-<select class="size-dropdown" disabled>
-<option>Out of Stock</option>
+<select class="size-dropdown" data-name="Peppy Paneer Pizza" onchange="updatePizza(this)">
+<option value="169" data-size="Regular - 1 Person">Regular - ₹169 (1 Person)</option>
+<option value="220" data-size="Medium - 2 Persons">Medium - ₹220 (2 Persons)</option>
+<option value="320" data-size="Large - 3 Persons">Large - ₹320 (3 Persons)</option>
 </select>
 <p class="price">₹169</p>
 <div class="btn-group">
-<button class="order-btn cart-btn btn-disabled" disabled>Sold Out</button>
-<button class="order-btn wa-btn btn-disabled" disabled>Out of Stock</button>
+<button class="order-btn cart-btn" onclick="addToCart('Peppy Paneer Pizza (Regular - 1 Person)',169)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Peppy Paneer Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-169">Order on WhatsApp</a>
 </div>
 </div>
 </div>
 
-<div class="food-card disabled-card">
+<!-- Veggie Paradise Pizza -->
+<div class="food-card">
 <div class="card-image-wrap">
 <img src="https://i.postimg.cc/FHBSWDtd/Whats-App-Image-2026-03-02-at-20-54-42.jpg" alt="Veggie Paradise Pizza" loading="lazy">
 <span class="food-tag veg">Veg</span>
@@ -961,18 +974,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="card-body">
 <h3>Veggie Paradise Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
-<select class="size-dropdown" disabled>
-<option>Out of Stock</option>
+<select class="size-dropdown" data-name="Veggie Paradise Pizza" onchange="updatePizza(this)">
+<option value="170" data-size="Regular - 1 Person">Regular - ₹170 (1 Person)</option>
+<option value="289" data-size="Medium - 2 Persons">Medium - ₹289 (2 Persons)</option>
+<option value="390" data-size="Large - 3 Persons">Large - ₹390 (3 Persons)</option>
 </select>
 <p class="price">₹170</p>
 <div class="btn-group">
-<button class="order-btn cart-btn btn-disabled" disabled>Sold Out</button>
-<button class="order-btn wa-btn btn-disabled" disabled>Out of Stock</button>
+<button class="order-btn cart-btn" onclick="addToCart('Veggie Paradise Pizza (Regular - 1 Person)',170)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Veggie Paradise Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-170">Order on WhatsApp</a>
 </div>
 </div>
 </div>
 
-<div class="food-card disabled-card">
+<!-- Margherita Pizza -->
+<div class="food-card">
 <div class="card-image-wrap">
 <img src="https://i.postimg.cc/y6cDh7YV/Whats-App-Image-2026-03-02-at-20-45-51.jpg" alt="Margherita Pizza" loading="lazy">
 <span class="food-tag veg">Veg</span>
@@ -980,18 +996,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="card-body">
 <h3>Margherita Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
-<select class="size-dropdown" disabled>
-<option>Out of Stock</option>
+<select class="size-dropdown" data-name="Margherita Pizza" onchange="updatePizza(this)">
+<option value="119" data-size="Regular - 1 Person">Regular - ₹119 (1 Person)</option>
+<option value="199" data-size="Medium - 2 Persons">Medium - ₹199 (2 Persons)</option>
+<option value="290" data-size="Large - 3 Persons">Large - ₹290 (3 Persons)</option>
 </select>
 <p class="price">₹119</p>
 <div class="btn-group">
-<button class="order-btn cart-btn btn-disabled" disabled>Sold Out</button>
-<button class="order-btn wa-btn btn-disabled" disabled>Out of Stock</button>
+<button class="order-btn cart-btn" onclick="addToCart('Margherita Pizza (Regular - 1 Person)',119)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Margherita Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-119">Order on WhatsApp</a>
 </div>
 </div>
 </div>
 
-<div class="food-card disabled-card">
+<!-- Paneer Corn Pizza -->
+<div class="food-card">
 <div class="card-image-wrap">
 <img src="https://i.postimg.cc/CxpMFQ3Q/Chat-GPT-Image-Mar-2-2026-11-02-24-PM.jpg" alt="Paneer Corn Pizza" loading="lazy">
 <span class="food-tag veg">Veg</span>
@@ -999,18 +1018,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="card-body">
 <h3>Paneer Corn Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
-<select class="size-dropdown" disabled>
-<option>Out of Stock</option>
+<select class="size-dropdown" data-name="Paneer Corn Pizza" onchange="updatePizza(this)">
+<option value="170" data-size="Regular - 1 Person">Regular - ₹170 (1 Person)</option>
+<option value="260" data-size="Medium - 2 Persons">Medium - ₹260 (2 Persons)</option>
+<option value="390" data-size="Large - 3 Persons">Large - ₹390 (3 Persons)</option>
 </select>
 <p class="price">₹170</p>
 <div class="btn-group">
-<button class="order-btn cart-btn btn-disabled" disabled>Sold Out</button>
-<button class="order-btn wa-btn btn-disabled" disabled>Out of Stock</button>
+<button class="order-btn cart-btn" onclick="addToCart('Paneer Corn Pizza (Regular - 1 Person)',170)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Paneer Corn Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-170">Order on WhatsApp</a>
 </div>
 </div>
 </div>
 
-<div class="food-card disabled-card">
+<!-- Mushroom Pizza -->
+<div class="food-card">
 <div class="card-image-wrap">
 <img src="https://i.postimg.cc/XqqDLn57/mashroom-pizza.jpg" alt="Mushroom Pizza" loading="lazy">
 <span class="food-tag veg">Veg</span>
@@ -1018,13 +1040,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="card-body">
 <h3>Mushroom Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
-<select class="size-dropdown" disabled>
-<option>Out of Stock</option>
+<select class="size-dropdown" data-name="Mushroom Pizza" onchange="updatePizza(this)">
+<option value="180" data-size="Regular - 1 Person">Regular - ₹180 (1 Person)</option>
+<option value="250" data-size="Medium - 2 Persons">Medium - ₹250 (2 Persons)</option>
+<option value="420" data-size="Large - 3 Persons">Large - ₹420 (3 Persons)</option>
 </select>
 <p class="price">₹180</p>
 <div class="btn-group">
-<button class="order-btn cart-btn btn-disabled" disabled>Sold Out</button>
-<button class="order-btn wa-btn btn-disabled" disabled>Out of Stock</button>
+<button class="order-btn cart-btn" onclick="addToCart('Mushroom Pizza (Regular - 1 Person)',180)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Mushroom Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-180">Order on WhatsApp</a>
 </div>
 </div>
 </div>
