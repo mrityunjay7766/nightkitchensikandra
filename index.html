@@ -1052,7 +1052,20 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 </div>
-  
+
+  <!-- Sandwich -->
+<div class="food-card">
+    <img src="https://i.postimg.cc/HxL3wVkt/sndwith.avif" alt="Sandwich">
+    <h3>Butter Sandwich</h3>
+    <div class="Sandwich"></div>
+    
+    <!-- Price hata di gayi hai -->
+    <p class="coming-soon" style="color: #e67e22; font-weight: bold; margin: 10px 0;">Coming Soon</p>
+    
+    <!-- Buttons ko disable kiya gaya hai -->
+    <button class="order-btn" disabled style="background-color: #ccc; cursor: not-allowed;">Add to Cart</button>
+    <button class="order-btn" disabled style="background-color: #ccc; cursor: not-allowed;">Order on WhatsApp</button>
+</div>
 
 <script>
 function updatePizza(select){
@@ -1085,6 +1098,37 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 </div>
 </div>
 
+<!-- Thums Up -->
+<div class="food-card">
+<div class="card-image-wrap">
+<img src="https://rukminim2.flixcart.com/image/1229/1229/xif0q/aerated-drink/o/t/v/-original-imagsw2bhz8m6xkk.jpeg?q=90" alt="Thums Up Soft Drink" loading="lazy">
+<span class="food-tag drink">Drink</span>
+</div>
+<div class="card-body">
+<h3>Thums Up Soft Drink</h3>
+<p class="price">₹45 <span style="font-size: 14px; color: #555; font-weight: normal;">(600ml - Chilled)</span></p>
+<div class="btn-group">
+<button class="order-btn cart-btn" onclick="addToCart('Thums Up 750ml', 45)">Add to Cart</button>
+<a href="https://wa.me/917061632122?text=I want to order Chilled Thums Up (750ml)%0AName:%0AAddress:%0APrice-45" class="order-btn wa-btn">Order on WhatsApp</a>
+</div>
+</div>
+</div>
+<div class="food-card">
+  <img src="https://m.media-amazon.com/images/I/419xqB8LHAL._SY300_SX300_QL70_FMwebp_.jpg" alt="Maaza Mango Drink">
+  <h3>Maaza Mango Drink</h3>
+  <p class="price">₹45 <span style="font-size: 14px; color: #555; font-weight: normal;">(600ml - Chilled)</span></p>
+  <button class="order-btn cart-btn" onclick="addToCart('Maaza 600ml', 45)">Add to Cart</button>
+  <a href="https://wa.me/917061632122?text=I want to order Chilled Maaza (600ml)%0AName:%0AAddress:%0APrice-45" class="order-btn">Order on WhatsApp</a>
+</div>
+
+<div class="food-card">
+    <img src="https://m.media-amazon.com/images/I/51v8nyxSOYL.jpg" alt="Coca Cola Cold Drink">
+    <h3>Coca Cola Cold Drink</h3>
+    <p class="price">₹45 <span style="font-size: 14px; color: #555; font-weight: normal;">(750ml - Chilled)</span></p>
+    <button class="order-btn cart-btn" onclick="addToCart('Coca Cola', 45)">Add to Cart</button>
+    <a href="https://wa.me/917061632122?text=I want to order Chilled Coca Cola (750ml)%0AName:%0AAddress:%0APrice-45" class="order-btn">Order on WhatsApp</a>
+</div>
+  
 <!-- Veg Burger -->
 <div class="food-card">
 <div class="card-image-wrap">
