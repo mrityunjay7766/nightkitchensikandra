@@ -33,9 +33,18 @@
 <meta name="author" content="Night Kitchen Sikandra">
 <meta name="robots" content="index, follow">
 <meta name="rating" content="General">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
+<!-- Google Fonts: preconnect then load -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap">
+
+<!-- Preload hero/LCP image -->
+<link rel="preload" as="image"
+  href="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FMGR226qh%2Fcorn_129.png&w=800&fm=avif&q=80"
+  fetchpriority="high">
+
+<style>
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -616,7 +625,7 @@ footer {
   background: rgba(0,0,0,0.92);
   padding: 15px;
   border-radius: 16px;
-  width: 300px;
+  width: 320px;
   max-width: calc(100vw - 20px);
   color: #00ffff;
   font-family: Arial, sans-serif;
@@ -649,6 +658,71 @@ footer {
   font-size: 16px;
   width: 100%;
   min-height: 48px;
+}
+
+/* Cart item qty stepper */
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.cart-item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #fff;
+}
+.cart-item-price {
+  white-space: nowrap;
+  color: #00ff00;
+  font-size: 13px;
+  font-weight: bold;
+}
+.cart-stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.cart-qty-btn {
+  background: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  transition: 0.2s;
+}
+.cart-qty-btn.minus {
+  color: #ff4444;
+  border: 1px solid #ff4444;
+}
+.cart-qty-btn.minus:active {
+  background: rgba(255,68,68,0.2);
+}
+.cart-qty-btn.plus {
+  color: #00ffff;
+  border: 1px solid #00ffff;
+}
+.cart-qty-btn.plus:active {
+  background: rgba(0,255,255,0.2);
+}
+.cart-qty-num {
+  min-width: 22px;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 14px;
 }
 
 /* ===== MOBILE RESPONSIVE ===== */
@@ -863,19 +937,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section class="menu">
 
-<style>
-    .food-card.disabled-card {
-        opacity: 0.6; /* Card thoda dhundhla dikhega */
-        filter: grayscale(0.8); /* Thoda black and white effect */
-    }
-    .btn-disabled {
-        background-color: #7f8c8d !important;
-        color: #bdc3c7 !important;
-        cursor: not-allowed !important;
-        border: none !important;
-        pointer-events: none; /* Click band karne ke liye */
-    }
-</style>
 
   <!-- Paneer Patties -->
 <div class="food-card">
@@ -903,25 +964,32 @@ document.addEventListener('DOMContentLoaded', function() {
 <a href="https://wa.me/917061632122?text=I want to order  Sandwich%0AName:%0AMobile No:%0AAddress: %0APrice-69" class="order-btn">Order on WhatsApp</a>
 </div>
 
-
 <!-- Corn Pizza -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/rpMTrTx4/Screenshot-2026-04-14-141443.png" alt="Corn Pizza" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FMGR226qh%2Fcorn_129.png&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FMGR226qh%2Fcorn_129.png&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FMGR226qh%2Fcorn_129.png&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FMGR226qh%2Fcorn_129.png&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Corn Pizza"
+  width="400" height="200"
+  fetchpriority="high">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
 <h3>Corn Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
 <select class="size-dropdown" data-name="Corn Pizza" onchange="updatePizza(this)">
-<option value="139" data-size="Regular - 1 Person">Regular - ₹139 (1 Person)</option>
+<option value="129" data-size="Regular - 1 Person">Regular - ₹129 (1 Person)</option>
 <option value="199" data-size="Medium - 2 Persons">Medium - ₹199 (2 Persons)</option>
-<option value="290" data-size="Large - 3 Persons">Large - ₹290 (3 Persons)</option>
+<option value="250" data-size="Large - 3 Persons">Large - ₹250 (3 Persons)</option>
 </select>
-<p class="price">₹139</p>
+<p class="price">₹129</p>
 <div class="btn-group">
-<button class="order-btn cart-btn" onclick="addToCart('Corn Pizza (Regular - 1 Person)',139)">Add to Cart</button>
-<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Corn Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-139">Order on WhatsApp</a>
+<button class="order-btn cart-btn" onclick="addToCart('Corn Pizza (Regular - 1 Person)',129)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Corn Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-129">Order on WhatsApp</a>
 </div>
 </div>
 </div>
@@ -929,21 +997,29 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Mexican Green Wave Pizza -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/sx1dQghf/Whats-App-Image-2026-03-08-at-12-29-40.jpg" alt="Mexican Green Wave Pizza" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fsx1dQghf%2FWhats-App-Image-2026-03-08-at-12-29-40.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fsx1dQghf%2FWhats-App-Image-2026-03-08-at-12-29-40.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fsx1dQghf%2FWhats-App-Image-2026-03-08-at-12-29-40.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fsx1dQghf%2FWhats-App-Image-2026-03-08-at-12-29-40.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Mexican Green Wave Pizza"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
 <h3>Mexican Green Wave Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
 <select class="size-dropdown" data-name="Mexican Green Wave Pizza" onchange="updatePizza(this)">
-<option value="179" data-size="Regular - 1 Person">Regular - ₹179 (1 Person)</option>
+<option value="169" data-size="Regular - 1 Person">Regular - ₹169 (1 Person)</option>
 <option value="240" data-size="Medium - 2 Persons">Medium - ₹240 (2 Persons)</option>
 <option value="310" data-size="Large - 3 Persons">Large - ₹310 (3 Persons)</option>
 </select>
-<p class="price">₹179</p>
+<p class="price">₹169</p>
 <div class="btn-group">
-<button class="order-btn cart-btn" onclick="addToCart('Mexican Green Wave Pizza (Regular - 1 Person)',179)">Add to Cart</button>
-<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Mexican Green Wave Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-179">Order on WhatsApp</a>
+<button class="order-btn cart-btn" onclick="addToCart('Mexican Green Wave Pizza (Regular - 1 Person)',169)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Mexican Green Wave Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-169">Order on WhatsApp</a>
 </div>
 </div>
 </div>
@@ -951,7 +1027,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Special Paneer Pizza -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/xCh6Rn7K/pizza.avif" alt="Special Paneer Pizza" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FxCh6Rn7K%2Fpizza.avif&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FxCh6Rn7K%2Fpizza.avif&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FxCh6Rn7K%2Fpizza.avif&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FxCh6Rn7K%2Fpizza.avif&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Special Paneer Pizza"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -959,8 +1043,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <label class="size-label">Select Size & Serving:</label>
 <select class="size-dropdown" data-name="Special Paneer Pizza" onchange="updatePizza(this)">
 <option value="149" data-size="Regular - 1 Person">Regular - ₹149 (1 Person)</option>
-<option value="250" data-size="Medium - 2 Persons">Medium - ₹250 (2 Persons)</option>
-<option value="330" data-size="Large - 3 Persons">Large - ₹330 (3 Persons)</option>
+<option value="220" data-size="Medium - 2 Persons">Medium - ₹220 (2 Persons)</option>
+<option value="280" data-size="Large - 3 Persons">Large - ₹280 (3 Persons)</option>
 </select>
 <p class="price">₹149</p>
 <div class="btn-group">
@@ -973,21 +1057,29 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Peppy Paneer Pizza -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/7YCw1VN6/Whats-App-Image-2026-03-02-at-20-57-56.jpg" alt="Peppy Paneer Pizza" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2F7YCw1VN6%2FWhats-App-Image-2026-03-02-at-20-57-56.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2F7YCw1VN6%2FWhats-App-Image-2026-03-02-at-20-57-56.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2F7YCw1VN6%2FWhats-App-Image-2026-03-02-at-20-57-56.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2F7YCw1VN6%2FWhats-App-Image-2026-03-02-at-20-57-56.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Peppy Paneer Pizza"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
 <h3>Peppy Paneer Pizza</h3>
 <label class="size-label">Select Size & Serving:</label>
 <select class="size-dropdown" data-name="Peppy Paneer Pizza" onchange="updatePizza(this)">
-<option value="169" data-size="Regular - 1 Person">Regular - ₹169 (1 Person)</option>
+<option value="159" data-size="Regular - 1 Person">Regular - ₹159 (1 Person)</option>
 <option value="220" data-size="Medium - 2 Persons">Medium - ₹220 (2 Persons)</option>
-<option value="320" data-size="Large - 3 Persons">Large - ₹320 (3 Persons)</option>
+<option value="280" data-size="Large - 3 Persons">Large - ₹280 (3 Persons)</option>
 </select>
-<p class="price">₹169</p>
+<p class="price">₹159</p>
 <div class="btn-group">
-<button class="order-btn cart-btn" onclick="addToCart('Peppy Paneer Pizza (Regular - 1 Person)',169)">Add to Cart</button>
-<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Peppy Paneer Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-169">Order on WhatsApp</a>
+<button class="order-btn cart-btn" onclick="addToCart('Peppy Paneer Pizza (Regular - 1 Person)',159)">Add to Cart</button>
+<a class="order-btn wa-btn" href="https://wa.me/917061632122?text=I want to order Peppy Paneer Pizza (Regular - 1 Person)%0AName:%0AMobile No:%0AAddress:%0APrice-159">Order on WhatsApp</a>
 </div>
 </div>
 </div>
@@ -995,7 +1087,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Veggie Paradise Pizza -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/FHBSWDtd/Whats-App-Image-2026-03-02-at-20-54-42.jpg" alt="Veggie Paradise Pizza" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FFHBSWDtd%2FWhats-App-Image-2026-03-02-at-20-54-42.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FFHBSWDtd%2FWhats-App-Image-2026-03-02-at-20-54-42.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FFHBSWDtd%2FWhats-App-Image-2026-03-02-at-20-54-42.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FFHBSWDtd%2FWhats-App-Image-2026-03-02-at-20-54-42.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Veggie Paradise Pizza"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1003,8 +1103,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <label class="size-label">Select Size & Serving:</label>
 <select class="size-dropdown" data-name="Veggie Paradise Pizza" onchange="updatePizza(this)">
 <option value="170" data-size="Regular - 1 Person">Regular - ₹170 (1 Person)</option>
-<option value="289" data-size="Medium - 2 Persons">Medium - ₹289 (2 Persons)</option>
-<option value="390" data-size="Large - 3 Persons">Large - ₹390 (3 Persons)</option>
+<option value="250" data-size="Medium - 2 Persons">Medium - ₹250 (2 Persons)</option>
+<option value="300" data-size="Large - 3 Persons">Large - ₹300 (3 Persons)</option>
 </select>
 <p class="price">₹170</p>
 <div class="btn-group">
@@ -1017,7 +1117,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Margherita Pizza -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/y6cDh7YV/Whats-App-Image-2026-03-02-at-20-45-51.jpg" alt="Margherita Pizza" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fy6cDh7YV%2FWhats-App-Image-2026-03-02-at-20-45-51.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fy6cDh7YV%2FWhats-App-Image-2026-03-02-at-20-45-51.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fy6cDh7YV%2FWhats-App-Image-2026-03-02-at-20-45-51.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fy6cDh7YV%2FWhats-App-Image-2026-03-02-at-20-45-51.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Margherita Pizza"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1026,7 +1134,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <select class="size-dropdown" data-name="Margherita Pizza" onchange="updatePizza(this)">
 <option value="119" data-size="Regular - 1 Person">Regular - ₹119 (1 Person)</option>
 <option value="199" data-size="Medium - 2 Persons">Medium - ₹199 (2 Persons)</option>
-<option value="290" data-size="Large - 3 Persons">Large - ₹290 (3 Persons)</option>
+<option value="259" data-size="Large - 3 Persons">Large - ₹259 (3 Persons)</option>
 </select>
 <p class="price">₹119</p>
 <div class="btn-group">
@@ -1039,7 +1147,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Paneer Corn Pizza -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/CxpMFQ3Q/Chat-GPT-Image-Mar-2-2026-11-02-24-PM.jpg" alt="Paneer Corn Pizza" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FCxpMFQ3Q%2FChat-GPT-Image-Mar-2-2026-11-02-24-PM.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FCxpMFQ3Q%2FChat-GPT-Image-Mar-2-2026-11-02-24-PM.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FCxpMFQ3Q%2FChat-GPT-Image-Mar-2-2026-11-02-24-PM.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FCxpMFQ3Q%2FChat-GPT-Image-Mar-2-2026-11-02-24-PM.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Paneer Corn Pizza"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1047,8 +1163,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <label class="size-label">Select Size & Serving:</label>
 <select class="size-dropdown" data-name="Paneer Corn Pizza" onchange="updatePizza(this)">
 <option value="170" data-size="Regular - 1 Person">Regular - ₹170 (1 Person)</option>
-<option value="260" data-size="Medium - 2 Persons">Medium - ₹260 (2 Persons)</option>
-<option value="390" data-size="Large - 3 Persons">Large - ₹390 (3 Persons)</option>
+<option value="240" data-size="Medium - 2 Persons">Medium - ₹240 (2 Persons)</option>
+<option value="300" data-size="Large - 3 Persons">Large - ₹300 (3 Persons)</option>
 </select>
 <p class="price">₹170</p>
 <div class="btn-group">
@@ -1061,7 +1177,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Mushroom Pizza -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/XqqDLn57/mashroom-pizza.jpg" alt="Mushroom Pizza" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FXqqDLn57%2Fmashroom-pizza.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FXqqDLn57%2Fmashroom-pizza.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FXqqDLn57%2Fmashroom-pizza.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FXqqDLn57%2Fmashroom-pizza.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Mushroom Pizza"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1070,7 +1194,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <select class="size-dropdown" data-name="Mushroom Pizza" onchange="updatePizza(this)">
 <option value="180" data-size="Regular - 1 Person">Regular - ₹180 (1 Person)</option>
 <option value="250" data-size="Medium - 2 Persons">Medium - ₹250 (2 Persons)</option>
-<option value="420" data-size="Large - 3 Persons">Large - ₹420 (3 Persons)</option>
+<option value="320" data-size="Large - 3 Persons">Large - ₹320 (3 Persons)</option>
 </select>
 <p class="price">₹180</p>
 <div class="btn-group">
@@ -1079,8 +1203,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 </div>
-
-  
 
 <script>
 function updatePizza(select){
@@ -1100,7 +1222,14 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Sprite -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://imgs.search.brave.com/VbkF08xGsaNeE_6rW3DUbGnK_-8hlhhaEo_0-LPGV-E/rs:fit:200:200:1:0/g:ce/aHR0cHM6Ly9saXF1/b3JnZW5pZS5pbi93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMC8w/OC9TcHJpdGUuanBn" alt="Sprite Soft Drink" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fimgs.search.brave.com%2FVbkF08xGsaNeE_6rW3DUbGnK_-8hlhhaEo_0-LPGV-E%2Frs%3Afit%3A200%3A200%3A1%3A0%2Fg%3Ace%2FaHR0cHM6Ly9saXF1b3JnZW5pZS5pbi93cC1jb250ZW50L3VwbG9hZHMvMjAyMC8wOC9TcHJpdGUuanBn&w=400&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fimgs.search.brave.com%2FVbkF08xGsaNeE_6rW3DUbGnK_-8hlhhaEo_0-LPGV-E%2Frs%3Afit%3A200%3A200%3A1%3A0%2Fg%3Ace%2FaHR0cHM6Ly9saXF1b3JnZW5pZS5pbi93cC1jb250ZW50L3VwbG9hZHMvMjAyMC8wOC9TcHJpdGUuanBn&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fimgs.search.brave.com%2FVbkF08xGsaNeE_6rW3DUbGnK_-8hlhhaEo_0-LPGV-E%2Frs%3Afit%3A200%3A200%3A1%3A0%2Fg%3Ace%2FaHR0cHM6Ly9saXF1b3JnZW5pZS5pbi93cC1jb250ZW50L3VwbG9hZHMvMjAyMC8wOC9TcHJpdGUuanBn&w=800&fm=avif&q=80 800w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Sprite Soft Drink"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag drink">Drink</span>
 </div>
 <div class="card-body">
@@ -1116,7 +1245,14 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Thums Up -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://rukminim2.flixcart.com/image/1229/1229/xif0q/aerated-drink/o/t/v/-original-imagsw2bhz8m6xkk.jpeg?q=90" alt="Thums Up Soft Drink" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Frukminim2.flixcart.com%2Fimage%2F1229%2F1229%2Fxif0q%2Faerated-drink%2Fo%2Ft%2Fv%2F-original-imagsw2bhz8m6xkk.jpeg%3Fq%3D90&w=400&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Frukminim2.flixcart.com%2Fimage%2F1229%2F1229%2Fxif0q%2Faerated-drink%2Fo%2Ft%2Fv%2F-original-imagsw2bhz8m6xkk.jpeg%3Fq%3D90&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Frukminim2.flixcart.com%2Fimage%2F1229%2F1229%2Fxif0q%2Faerated-drink%2Fo%2Ft%2Fv%2F-original-imagsw2bhz8m6xkk.jpeg%3Fq%3D90&w=800&fm=avif&q=80 800w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Thums Up Soft Drink"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag drink">Drink</span>
 </div>
 <div class="card-body">
@@ -1128,31 +1264,47 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 </div>
 </div>
 </div>
+
+<!-- Sting Energy Drink -->
 <div class="food-card">
-  <img src="https://m.media-amazon.com/images/I/419xqB8LHAL._SY300_SX300_QL70_FMwebp_.jpg" alt="Maaza Mango Drink">
-  <h3>Maaza Mango Drink</h3>
-  <p class="price">₹45 <span style="font-size: 14px; color: #555; font-weight: normal;">(600ml - Chilled)</span></p>
-  <button class="order-btn cart-btn" onclick="addToCart('Maaza 600ml', 45)">Add to Cart</button>
-  <a href="https://wa.me/917061632122?text=I want to order Chilled Maaza (600ml)%0AName:%0AAddress:%0APrice-45" class="order-btn">Order on WhatsApp</a>
+<div class="card-image-wrap">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fwww.bbassets.com%2Fmedia%2Fuploads%2Fp%2Fl%2F40113908_5-sting-energy-drink.jpg&w=400&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fwww.bbassets.com%2Fmedia%2Fuploads%2Fp%2Fl%2F40113908_5-sting-energy-drink.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fwww.bbassets.com%2Fmedia%2Fuploads%2Fp%2Fl%2F40113908_5-sting-energy-drink.jpg&w=800&fm=avif&q=80 800w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Sting Energy Drink"
+  width="400" height="200"
+  loading="lazy">
+<span class="food-tag drink">Drink</span>
+</div>
+<div class="card-body">
+<h3>Sting Energy Drink</h3>
+<p class="price">₹25 <span style="font-size: 14px; color: #555; font-weight: normal;">(250ml - Chilled)</span></p>
+<div class="btn-group">
+<button class="order-btn cart-btn" onclick="addToCart('Sting Energy Drink', 25)">Add to Cart</button>
+<a href="https://wa.me/917061632122?text=I want to order Sting Energy Drink (250ml)%0AName:%0AAddress:%0APrice-25" class="order-btn wa-btn">Order on WhatsApp</a>
+</div>
+</div>
 </div>
 
-<div class="food-card">
-    <img src="https://m.media-amazon.com/images/I/51v8nyxSOYL.jpg" alt="Coca Cola Cold Drink">
-    <h3>Coca Cola Cold Drink</h3>
-    <p class="price">₹45 <span style="font-size: 14px; color: #555; font-weight: normal;">(750ml - Chilled)</span></p>
-    <button class="order-btn cart-btn" onclick="addToCart('Coca Cola', 45)">Add to Cart</button>
-    <a href="https://wa.me/917061632122?text=I want to order Chilled Coca Cola (750ml)%0AName:%0AAddress:%0APrice-45" class="order-btn">Order on WhatsApp</a>
-</div>
-  
 <!-- Veg Burger -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/Qt2tFxCw/VEG-BURGER2.jpg" alt="Veg Burger" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FQt2tFxCw%2FVEG-BURGER2.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FQt2tFxCw%2FVEG-BURGER2.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FQt2tFxCw%2FVEG-BURGER2.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FQt2tFxCw%2FVEG-BURGER2.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Veg Burger"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
 <h3>Veg Burger</h3>
-<p class="price">₹118 (2 pic)</p>
+<p class="price">₹118</p>
 <div class="btn-group">
 <button class="order-btn cart-btn" onclick="addToCart('Veg Burger',118)">Add to Cart</button>
 <a href="https://wa.me/917061632122?text=I want to order Veg Burger%0AName:%0AMobile No:%0AAddress:%0APrice-118" class="order-btn wa-btn">Order on WhatsApp</a>
@@ -1163,7 +1315,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Pre Made Cake -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/rsS6n3QC/cake-classic1.jpg" alt="Pre Made Cake" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FrsS6n3QC%2Fcake-classic1.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FrsS6n3QC%2Fcake-classic1.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FrsS6n3QC%2Fcake-classic1.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FrsS6n3QC%2Fcake-classic1.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Pre Made Cake"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1183,7 +1343,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Custom Design Cake -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/sft0RCdb/night-kitchen-cake.png" alt="Custom Design Cake" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fsft0RCdb%2Fnight-kitchen-cake.png&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fsft0RCdb%2Fnight-kitchen-cake.png&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fsft0RCdb%2Fnight-kitchen-cake.png&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2Fsft0RCdb%2Fnight-kitchen-cake.png&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Custom Design Cake"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1208,7 +1376,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Kurkure Momos -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/2S42KhT2/09.jpg" alt="Kurkure Momos" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2F2S42KhT2%2F09.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2F2S42KhT2%2F09.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2F2S42KhT2%2F09.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2F2S42KhT2%2F09.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Kurkure Momos"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1224,7 +1400,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Egg Roll -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://www.bigbasket.com/media/uploads/recipe/w-l/3684_1_1.jpg" alt="Egg Roll" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fwww.bigbasket.com%2Fmedia%2Fuploads%2Frecipe%2Fw-l%2F3684_1_1.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fwww.bigbasket.com%2Fmedia%2Fuploads%2Frecipe%2Fw-l%2F3684_1_1.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fwww.bigbasket.com%2Fmedia%2Fuploads%2Frecipe%2Fw-l%2F3684_1_1.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fwww.bigbasket.com%2Fmedia%2Fuploads%2Frecipe%2Fw-l%2F3684_1_1.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Egg Roll"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag nonveg">Non-Veg</span>
 </div>
 <div class="card-body">
@@ -1240,12 +1424,20 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Veg Roll -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.ytimg.com/vi/8vfTcJZ7E3Y/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDhc6H64vjSUl4xx6Xx33tghGEO8w" alt="Veg Roll" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F8vfTcJZ7E3Y%2Fhq720.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F8vfTcJZ7E3Y%2Fhq720.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F8vfTcJZ7E3Y%2Fhq720.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F8vfTcJZ7E3Y%2Fhq720.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Veg Roll"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
 <h3>Veg Roll</h3>
-<p class="price">₹50 (1 pic)</p>
+<p class="price">₹50</p>
 <div class="btn-group">
 <button class="order-btn cart-btn" onclick="addToCart('Veg Roll', 50)">Add to Cart</button>
 <a href="https://wa.me/917061632122?text=I want to order Veg Roll%0AName:%0AMobile No:%0AAddress:%0APrice-50" class="order-btn wa-btn">Order on WhatsApp</a>
@@ -1256,7 +1448,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Egg Chowmein -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://hotelramdhanu.com/wp-content/uploads/2025/02/egg-chawmin.jpg" alt="Egg Chowmein" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fhotelramdhanu.com%2Fwp-content%2Fuploads%2F2025%2F02%2Fegg-chawmin.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fhotelramdhanu.com%2Fwp-content%2Fuploads%2F2025%2F02%2Fegg-chawmin.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fhotelramdhanu.com%2Fwp-content%2Fuploads%2F2025%2F02%2Fegg-chawmin.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fhotelramdhanu.com%2Fwp-content%2Fuploads%2F2025%2F02%2Fegg-chawmin.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Egg Chowmein"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag nonveg">Non-Veg</span>
 </div>
 <div class="card-body">
@@ -1272,18 +1472,26 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Chowmein -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://images.getrecipekit.com/20221130023757-untitled-design-12-3.png?aspect_ratio=16:9&quality=90" alt="Chowmein" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fimages.getrecipekit.com%2F20221130023757-untitled-design-12-3.png%3Faspect_ratio%3D16%3A9%26quality%3D90&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fimages.getrecipekit.com%2F20221130023757-untitled-design-12-3.png%3Faspect_ratio%3D16%3A9%26quality%3D90&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fimages.getrecipekit.com%2F20221130023757-untitled-design-12-3.png%3Faspect_ratio%3D16%3A9%26quality%3D90&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fimages.getrecipekit.com%2F20221130023757-untitled-design-12-3.png%3Faspect_ratio%3D16%3A9%26quality%3D90&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Chowmein"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
 <h3>Chowmein</h3>
 <p class="price">
- <span class="half">₹50 (Half Plate)</span><br>
- <span class="full">₹90 (Full Plate)</span>
+ <span class="half">₹40 (Half Plate)</span><br>
+ <span class="full">₹80 (Full Plate)</span>
 </p>
 <select id="chowmein-option" class="select-option">
-<option value="50">Half Plate - ₹50</option>
-<option value="90">Full Plate - ₹90</option>
+<option value="40">Half Plate - ₹40</option>
+<option value="80">Full Plate - ₹80</option>
 </select>
 <div class="btn-group">
 <button class="order-btn cart-btn" onclick="addToCartWithOption('Chowmein','chowmein-option')">Add to Cart</button>
@@ -1295,7 +1503,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Samosa -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/nzTmL53y/samosa.jpg" alt="Samosa" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FnzTmL53y%2Fsamosa.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FnzTmL53y%2Fsamosa.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FnzTmL53y%2Fsamosa.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FnzTmL53y%2Fsamosa.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Samosa"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1311,7 +1527,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Mushroom Chilli -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/zB9BF7sX/Chat-GPT-Image-Sep-5-2025-10-27-38-PM.png" alt="Mushroom Chilli" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FzB9BF7sX%2FChat-GPT-Image-Sep-5-2025-10-27-38-PM.png&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FzB9BF7sX%2FChat-GPT-Image-Sep-5-2025-10-27-38-PM.png&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FzB9BF7sX%2FChat-GPT-Image-Sep-5-2025-10-27-38-PM.png&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FzB9BF7sX%2FChat-GPT-Image-Sep-5-2025-10-27-38-PM.png&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Mushroom Chilli"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1334,7 +1558,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Manchurian -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://www.awesomecuisine.com/wp-content/uploads/2018/07/cabbage_manchurian_dry.jpg" alt="Manchurian" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fwww.awesomecuisine.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fcabbage_manchurian_dry.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fwww.awesomecuisine.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fcabbage_manchurian_dry.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fwww.awesomecuisine.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fcabbage_manchurian_dry.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fwww.awesomecuisine.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fcabbage_manchurian_dry.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Manchurian"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1357,7 +1589,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Paratha -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://rookiewithacookie.com/wp-content/uploads/2020/05/IMG_2570.jpg" alt="Paratha" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Frookiewithacookie.com%2Fwp-content%2Fuploads%2F2020%2F05%2FIMG_2570.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Frookiewithacookie.com%2Fwp-content%2Fuploads%2F2020%2F05%2FIMG_2570.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Frookiewithacookie.com%2Fwp-content%2Fuploads%2F2020%2F05%2FIMG_2570.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Frookiewithacookie.com%2Fwp-content%2Fuploads%2F2020%2F05%2FIMG_2570.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Paratha"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1373,7 +1613,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Roti -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://www.dhlindustries.com/wp-content/uploads/2020/04/Tandoori-Roti-scaled.jpg" alt="Tandoori Roti" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fwww.dhlindustries.com%2Fwp-content%2Fuploads%2F2020%2F04%2FTandoori-Roti-scaled.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fwww.dhlindustries.com%2Fwp-content%2Fuploads%2F2020%2F04%2FTandoori-Roti-scaled.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fwww.dhlindustries.com%2Fwp-content%2Fuploads%2F2020%2F04%2FTandoori-Roti-scaled.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fwww.dhlindustries.com%2Fwp-content%2Fuploads%2F2020%2F04%2FTandoori-Roti-scaled.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Tandoori Roti"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1389,18 +1637,26 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Paneer Chowmein -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.ytimg.com/vi/rcR1owkn9s8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDAh_o6hARjTNSC26V6L6DRM_8zZQ" alt="Paneer Chowmein" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FrcR1owkn9s8%2Fhq720.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FrcR1owkn9s8%2Fhq720.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FrcR1owkn9s8%2Fhq720.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FrcR1owkn9s8%2Fhq720.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Paneer Chowmein"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
 <h3>Paneer Chowmein</h3>
 <p class="price">
   <span class="half">₹100 (Half Plate)</span><br>
-  <span class="full">₹180 (Full Plate)</span>
+  <span class="full">₹160 (Full Plate)</span>
 </p>
 <select id="paneer-chowmein-option" class="select-option">
   <option value="100">Half Plate - ₹100</option>
-  <option value="180">Full Plate - ₹180</option>
+  <option value="160">Full Plate - ₹160</option>
 </select>
 <div class="btn-group">
 <button class="order-btn cart-btn" onclick="addToCartWithOption('Paneer Chowmein','paneer-chowmein-option')">Add to Cart</button>
@@ -1412,7 +1668,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Paneer Chilli -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://rumkisgoldenspoon.com/wp-content/uploads/2021/04/Chilli-paneer-dry.jpg" alt="Paneer Chilli" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Frumkisgoldenspoon.com%2Fwp-content%2Fuploads%2F2021%2F04%2FChilli-paneer-dry.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Frumkisgoldenspoon.com%2Fwp-content%2Fuploads%2F2021%2F04%2FChilli-paneer-dry.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Frumkisgoldenspoon.com%2Fwp-content%2Fuploads%2F2021%2F04%2FChilli-paneer-dry.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Frumkisgoldenspoon.com%2Fwp-content%2Fuploads%2F2021%2F04%2FChilli-paneer-dry.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Paneer Chilli"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1435,7 +1699,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Chicken Chilli -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://cdn.restaurantify.com/assets/img/restaurants/zaika_indian_grill/items/chilli-chicken.jpg" alt="Chicken Chilli" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fcdn.restaurantify.com%2Fassets%2Fimg%2Frestaurants%2Fzaika_indian_grill%2Fitems%2Fchilli-chicken.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fcdn.restaurantify.com%2Fassets%2Fimg%2Frestaurants%2Fzaika_indian_grill%2Fitems%2Fchilli-chicken.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fcdn.restaurantify.com%2Fassets%2Fimg%2Frestaurants%2Fzaika_indian_grill%2Fitems%2Fchilli-chicken.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fcdn.restaurantify.com%2Fassets%2Fimg%2Frestaurants%2Fzaika_indian_grill%2Fitems%2Fchilli-chicken.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Chicken Chilli"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag nonveg">Non-Veg</span>
 </div>
 <div class="card-body">
@@ -1445,8 +1717,8 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
   <span class="full">₹200 (Full Plate)</span>
 </p>
 <select id="chicken-chilli-option" class="select-option">
-  <option value="150">Half Plate - ₹150 (4pics) </option>
-  <option value="200">Full Plate - ₹200 8 (pics)</option>
+  <option value="150">Half Plate - ₹150</option>
+  <option value="200">Full Plate - ₹200</option>
 </select>
 <div class="btn-group">
 <button class="order-btn cart-btn" onclick="addToCartWithOption('Chicken Chilli','chicken-chilli-option')">Add to Cart</button>
@@ -1458,7 +1730,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Laccha Paratha -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/SsqXh25K/Chat-GPT-Image-Sep-5-2025-11-28-10-PM.png" alt="Laccha Paratha" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FSsqXh25K%2FChat-GPT-Image-Sep-5-2025-11-28-10-PM.png&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FSsqXh25K%2FChat-GPT-Image-Sep-5-2025-11-28-10-PM.png&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FSsqXh25K%2FChat-GPT-Image-Sep-5-2025-11-28-10-PM.png&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FSsqXh25K%2FChat-GPT-Image-Sep-5-2025-11-28-10-PM.png&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Laccha Paratha"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1474,7 +1754,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Veg Biryani -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.ytimg.com/vi/Do7ZdUodDdw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAEQctXy1aD1723HT7omylxjn4tMQ" alt="Veg Biryani" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FDo7ZdUodDdw%2Fhq720.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FDo7ZdUodDdw%2Fhq720.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FDo7ZdUodDdw%2Fhq720.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FDo7ZdUodDdw%2Fhq720.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Veg Biryani"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag veg">Veg</span>
 </div>
 <div class="card-body">
@@ -1490,7 +1778,15 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <!-- Chicken Biryani -->
 <div class="food-card">
 <div class="card-image-wrap">
-<img src="https://i.postimg.cc/SsMzqswv/Chicken-Biryani-Recipe.jpg" alt="Chicken Biryani" loading="lazy">
+<img
+  src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FSsMzqswv%2FChicken-Biryani-Recipe.jpg&w=800&fm=avif&q=80"
+  srcset="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FSsMzqswv%2FChicken-Biryani-Recipe.jpg&w=400&fm=avif&q=80 400w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FSsMzqswv%2FChicken-Biryani-Recipe.jpg&w=800&fm=avif&q=80 800w,
+          /.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FSsMzqswv%2FChicken-Biryani-Recipe.jpg&w=1200&fm=avif&q=80 1200w"
+  sizes="(max-width: 400px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 24px), 400px"
+  alt="Chicken Biryani"
+  width="400" height="200"
+  loading="lazy">
 <span class="food-tag nonveg">Non-Veg</span>
 </div>
 <div class="card-body">
@@ -1575,7 +1871,11 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 <section class="payment-section">
   <h2>Pay with UPI</h2>
   <p>Scan this QR code to pay</p>
-  <img src="https://i.postimg.cc/mDDwQg38/Whats-App-Image-2025-09-06-at-00-16-04-b319c152.jpg" alt="UPI QR Code" width="100">
+  <img
+    src="/.netlify/images?url=https%3A%2F%2Fi.postimg.cc%2FmDDwQg38%2FWhats-App-Image-2025-09-06-at-00-16-04-b319c152.jpg&w=400&fm=avif&q=90"
+    alt="UPI QR Code"
+    width="200" height="200"
+    loading="lazy">
   <p>Use your UPI app to scan this QR and pay directly.</p>
 </section>
 
@@ -1649,57 +1949,51 @@ function filterMenu() {
     }
 }
 
-// Cart
+// Cart — tracks {name, price, qty} per unique item
 let cart = [];
-let total = 0;
 
 function updateCartDisplay() {
     const cartItems = document.getElementById("cart-items");
     cartItems.innerHTML = '';
+    let total = 0;
 
     cart.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.style.marginBottom = "8px";
-        li.style.display = "flex";
-        li.style.justifyContent = "space-between";
-        li.style.alignItems = "center";
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
 
+        const li = document.createElement("li");
+        li.className = "cart-item-row";
         li.innerHTML = `
-            <span style="flex:1">${item.name} - ₹${item.price}</span>
-            <button onclick="removeFromCart(${index})"
-                    style="
-                        background: none;
-                        color: red;
-                        border: 1px solid red;
-                        padding: 6px 12px;
-                        cursor: pointer;
-                        border-radius: 6px;
-                        font-weight: bold;
-                        margin-left: 10px;
-                        font-size: 16px;
-                        min-width: 40px;
-                        min-height: 40px;
-                    ">
-                    &mdash;
-            </button>
+            <span class="cart-item-name" title="${item.name}">${item.name}</span>
+            <span class="cart-item-price">&#8377;${itemTotal}</span>
+            <div class="cart-stepper">
+                <button class="cart-qty-btn minus" onclick="changeQty(${index},-1)" aria-label="Remove one">&#8722;</button>
+                <span class="cart-qty-num">${item.qty}</span>
+                <button class="cart-qty-btn plus" onclick="changeQty(${index},1)" aria-label="Add one">&#43;</button>
+            </div>
         `;
         cartItems.appendChild(li);
     });
 
-    total = cart.reduce((sum, item) => sum + item.price, 0);
     document.getElementById("cart-total").textContent = total;
     document.getElementById("cart").style.display = cart.length > 0 ? "block" : "none";
 }
 
-function removeFromCart(index) {
-    if (index > -1) {
+function changeQty(index, delta) {
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) {
         cart.splice(index, 1);
-        updateCartDisplay();
     }
+    updateCartDisplay();
 }
 
 function addToCart(name, price) {
-    cart.push({name, price});
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ name, price, qty: 1 });
+    }
     updateCartDisplay();
 }
 
@@ -1707,7 +2001,13 @@ function addToCartWithOption(name, selectId) {
     const select = document.getElementById(selectId);
     const price = parseInt(select.value);
     const optionText = select.options[select.selectedIndex].text;
-    cart.push({ name: `${name} (${optionText.split('-')[0].trim()})`, price });
+    const itemName = `${name} (${optionText.split('-')[0].trim()})`;
+    const existing = cart.find(i => i.name === itemName);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ name: itemName, price, qty: 1 });
+    }
     updateCartDisplay();
 }
 
@@ -1717,13 +2017,13 @@ function checkout() {
         return;
     }
 
-    let orderDetails = cart.map(item => `• ${item.name} - ₹${item.price}`).join("%0A");
-    let totalAmount = cart.reduce((sum, i) => sum + i.price, 0);
+    let orderDetails = cart.map(item =>
+        `• ${item.name} x${item.qty} - ₹${item.price * item.qty}`
+    ).join("%0A");
+    let totalAmount = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
 
     let message = `🛒 *Order Details*%0A%0A${orderDetails}%0A%0A💰 *Total: ₹${totalAmount}*%0A%0A👤 Name:%0A📞 Mobile No:%0A🏠 Address:`;
-    let phoneNumber = "917061632122";
-    let waURL = `https://wa.me/${phoneNumber}?text=${message}`;
-    window.open(waURL, "_blank");
+    window.open(`https://wa.me/917061632122?text=${message}`, "_blank");
 }
 </script>
 
