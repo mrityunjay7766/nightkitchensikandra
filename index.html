@@ -1156,12 +1156,20 @@ waBtn.href = `https://wa.me/917061632122?text=${text}`;
 }
 </script>
 
-  <div class="food-card">
-<img src="https://imgs.search.brave.com/W6yT71R08cZrcOWqQ16sRemUm4Qa1jEpwq0etjYIiHs/rs:fit:200:200:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFCcDMwQ1IzSUwu/anBn" alt="Red Bull Energy Drink">
-    <h3>Red Bull Energy Drink</h3>
-    <p class="price">₹125 <span style="font-size: 14px; color: #555; font-weight: normal;">(250ml - Chilled)</span></p>
-    <button class="order-btn cart-btn" onclick="addToCart('Red Bull', 125)">Add to Cart</button>
-    <a href="https://wa.me/917061632122?text=I want to order Red Bull (250ml)%0AName:%0AAddress:%0APrice-125" class="order-btn">Order on WhatsApp</a>
+  <!-- Red Bull -->
+<div class="food-card">
+    <div class="card-image-wrap">
+        <img src="https://imgs.search.brave.com/W6yT71R08cZrcOWqQ16sRemUm4Qa1jEpwq0etjYIiHs/rs:fit:200:200:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFCcDMwQ1IzSUwu/anBn" alt="Red Bull Energy Drink" loading="lazy">
+        <span class="food-tag drink">Drink</span>
+    </div>
+    <div class="card-body">
+        <h3>Red Bull Energy Drink</h3>
+        <p class="price">₹125 <span style="font-size: 14px; color: #555; font-weight: normal;">(250ml - Chilled)</span></p>
+        <div class="btn-group">
+            <button class="order-btn cart-btn" onclick="addToCart('Red Bull 250ml', 125)">Add to Cart</button>
+            <a href="https://wa.me/917061632122?text=I want to order Red Bull (250ml)%0AName:%0AAddress:%0APrice-125" class="order-btn wa-btn">Order on WhatsApp</a>
+        </div>
+    </div>
 </div>
 
 
