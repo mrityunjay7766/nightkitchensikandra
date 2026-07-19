@@ -938,21 +938,25 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="menu">
 
 
-<!-- Paneer Patties -->
+<!-- Paneer Patties (Out of Stock) -->
 <div class="food-card">
-<div class="card-image-wrap">
-<img src="https://i.postimg.cc/26CWNg69/petties-1.jpg" alt="Paneer Patties" loading="lazy">
-<span class="food-tag veg">Veg</span>
-</div>
-<div class="card-body">
-<h3>Paneer Patties</h3>
-<p class="price">₹80 (2 pic)</p>
-<div class="btn-group">
-<button class="order-btn" onclick="addToCart('Paneer Patties',80)">Add to Cart</button>
-<a href="https://wa.me/917061632122?text=I want to order Paneer Patties%0AName:%0AMobile No:%0AAddress:%0APrice-80" class="order-btn wa-btn">Order on WhatsApp</a>
-</div>
-</div>
-</div>
+    <div class="card-image-wrap">
+        <img src="https://i.postimg.cc/26CWNg69/petties-1.jpg" alt="Paneer Patties" loading="lazy">
+        <span class="food-tag veg">Veg</span>
+        <!-- Out of Stock Badge -->
+        <span class="out-of-stock-badge" style="position: absolute; top: 10px; right: 10px; background: red; color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold;">Coming Tomorrow</span>
+    </div>
+    <div class="card-body">
+        <h3>Paneer Patties</h3>
+        <p class="price">₹80 (2 pic)</p>
+        <div class="btn-group">
+            <!-- Buttons Disabled -->
+            <button class="order-btn" disabled style="background-color: #ccc; cursor: not-allowed;">Out of Stock</button>
+            <a href="#" class="order-btn wa-btn" style="background-color: #ccc; cursor: not-allowed; pointer-events: none;">Coming Tomorrow</a>
+        </div>
+    </div>
+</div> 
+
 
   <!--  Sandwich -->
 <div class="food-card">
