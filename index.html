@@ -264,6 +264,26 @@ body {
   text-align: right;
 }
 
+.google-auth-btn {
+  background: #ffffff;
+  color: #333333;
+  border: none;
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+.google-auth-btn:hover {
+  background: #f1f1f1;
+}
+
 .history-item {
   background: #1e1e1e;
   padding: 12px;
@@ -397,7 +417,7 @@ body {
   </div>
 </div>
 
-<!-- Auth Modal (Login / Signup) -->
+<!-- Auth Modal (Google Sign-In + Phone/Password) -->
 <div class="modal-overlay" id="authModal">
   <div class="modal-box">
     <div class="modal-header">
@@ -405,40 +425,33 @@ body {
       <button class="close-btn" onclick="closeModal('authModal')">&times;</button>
     </div>
     <div class="form-group">
+      <!-- 1-Click Google Sign-In Button -->
+      <button type="button" class="google-auth-btn" onclick="signInWithGoogle()">
+        <svg width="18" height="18" viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <div style="display:flex; align-items:center; margin:8px 0;">
+        <hr style="flex:1; border:none; border-top:1px solid #333;">
+        <span style="padding:0 10px; color:#777; font-size:12px;">OR LOGIN WITH PHONE</span>
+        <hr style="flex:1; border:none; border-top:1px solid #333;">
+      </div>
+
       <input type="text" id="authName" placeholder="Aapka Naam (Full Name)" style="display:none;">
       <input type="tel" id="authPhone" placeholder="Mobile Number (10 digits)" maxlength="10">
       <input type="password" id="authPass" placeholder="Password">
-      <button class="link-btn" id="forgotPassLink" onclick="openResetFlow()">Forgot Password?</button>
+      <button class="link-btn" id="forgotPassLink" onclick="triggerWhatsAppPasswordReset()">Forgot Password?</button>
       <button class="order-btn" id="authSubmitBtn" onclick="processAuthSubmit()">Sign In</button>
+      
       <div style="text-align:center; font-size:13px; color:#aaa; margin-top:8px;">
         <span id="toggleAuthPrompt">New to Night Kitchen?</span>
         <button class="link-btn" style="display:inline; margin:0;" onclick="toggleAuthMode()" id="toggleAuthAction">Create Account</button>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Password Reset Modal (Automated SMS OTP) -->
-<div class="modal-overlay" id="resetModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3>Reset Password</h3>
-      <button class="close-btn" onclick="closeModal('resetModal')">&times;</button>
-    </div>
-    
-    <!-- Step 1: Request OTP -->
-    <div class="form-group" id="resetStep1">
-      <p style="font-size:13px; color:#ccc; margin:0 0 6px 0;">Apna registered 10-digit mobile number dalein. SMS se verification code aayega.</p>
-      <input type="tel" id="resetPhone" placeholder="Mobile Number (10 digits)" maxlength="10">
-      <button class="order-btn" onclick="sendResetOtp()">Send OTP via SMS</button>
-    </div>
-
-    <!-- Step 2: Verify OTP & New Password -->
-    <div class="form-group" id="resetStep2" style="display:none;">
-      <p style="font-size:13px; color:#ccc; margin:0 0 6px 0;">SMS me aaya 6-digit OTP aur naya password enter karein.</p>
-      <input type="text" id="resetOtp" placeholder="6-digit OTP code" maxlength="6">
-      <input type="password" id="newPass" placeholder="New Password (min 6 characters)">
-      <button class="order-btn" onclick="verifyOtpAndChangePassword()">Verify & Save Password</button>
     </div>
   </div>
 </div>
@@ -456,9 +469,6 @@ body {
     </button>
   </div>
 </div>
-
-<!-- Invisible reCAPTCHA container placed at the bottom of the body -->
-<div id="recaptcha-container"></div>
 
 <script>
 /* =========================================================
@@ -487,7 +497,6 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 ========================================================= */
 let isSignUpMode = false;
 let currentUser = JSON.parse(localStorage.getItem("nk_user")) || null;
-let confirmationResultGlobal = null;
 
 function renderUserHeader() {
   const btn = document.getElementById("authBtn");
@@ -512,6 +521,36 @@ function toggleAuthMode() {
   document.getElementById("forgotPassLink").style.display = isSignUpMode ? "none" : "block";
   document.getElementById("toggleAuthPrompt").textContent = isSignUpMode ? "Already have an account?" : "New to Night Kitchen?";
   document.getElementById("toggleAuthAction").textContent = isSignUpMode ? "Login" : "Create Account";
+}
+
+/* 1-Click Google Sign-In (100% Free Lifetime) */
+async function signInWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  try {
+    const result = await firebase.auth().signInWithPopup(provider);
+    const user = result.user;
+    
+    currentUser = {
+      name: user.displayName || "Customer",
+      phone: user.phoneNumber || user.email,
+      email: user.email || ""
+    };
+
+    if (supabaseClient) {
+      await supabaseClient.from('customers').upsert([{
+        phone: currentUser.phone,
+        name: currentUser.name
+      }], { onConflict: 'phone' });
+    }
+
+    localStorage.setItem("nk_user", JSON.stringify(currentUser));
+    renderUserHeader();
+    closeModal('authModal');
+    showToast("Welcome " + currentUser.name + "!");
+  } catch (error) {
+    console.error("Google Auth Error:", error);
+    alert("Google Sign-In Error: " + error.message);
+  }
 }
 
 async function processAuthSubmit() {
@@ -556,6 +595,13 @@ async function processAuthSubmit() {
   showToast("Welcome " + currentUser.name + "!");
 }
 
+function triggerWhatsAppPasswordReset() {
+  const phone = document.getElementById("authPhone").value.trim();
+  const promptText = phone ? `mera mobile number ${phone} hai` : "mera account password reset karna hai";
+  const msg = `Hello Night Kitchen, mujhe apna password reset karna hai, ${promptText}. Kripya madad karein.`;
+  window.open(`https://wa.me/917061632122?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
 function handleLogout() {
   localStorage.removeItem("nk_user");
   currentUser = null;
@@ -565,107 +611,7 @@ function handleLogout() {
 }
 
 /* =========================================================
-   3. FIREBASE AUTOMATED SMS OTP RESET
-========================================================= */
-function openResetFlow() {
-  closeModal('authModal');
-  document.getElementById("resetStep1").style.display = "flex";
-  document.getElementById("resetStep2").style.display = "none";
-  openModal('resetModal');
-}
-
-
-  
-async function sendResetOtp() {
-  const phone = document.getElementById("resetPhone").value.trim();
-  if (!phone || phone.length !== 10) {
-    alert("Kripya valid 10-digit number dalein.");
-    return;
-  }
-
-  // 1. Supabase me check karein ki customer registered hai ya nahi
-  if (supabaseClient) {
-    const { data, error } = await supabaseClient
-      .from('customers')
-      .select('phone')
-      .eq('phone', phone)
-      .single();
-
-    if (error || !data) {
-      alert("Yeh mobile number account me registered nahi hai!");
-      return;
-    }
-  }
-
-  // 2. reCAPTCHA div ko clean karke fresh banayein
-  const recaptchaHolder = document.getElementById("recaptcha-container");
-  if (recaptchaHolder) {
-    recaptchaHolder.innerHTML = "";
-  }
-  if (window.recaptchaVerifier) {
-    try {
-      window.recaptchaVerifier.clear();
-    } catch (e) {}
-    window.recaptchaVerifier = null;
-  }
-
-  // 3. Naya reCAPTCHA initialize karein
-  try {
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-      'size': 'invisible'
-    });
-
-    const internationalPhone = "+91" + phone;
-    confirmationResultGlobal = await firebase.auth().signInWithPhoneNumber(internationalPhone, window.recaptchaVerifier);
-
-    alert("OTP bhej diya gaya hai!");
-    document.getElementById("resetStep1").style.display = "none";
-    document.getElementById("resetStep2").style.display = "flex";
-  } catch (err) {
-    console.error("Firebase Details:", err);
-    alert("SMS send error: " + err.message);
-    if (window.recaptchaVerifier) {
-      try {
-        window.recaptchaVerifier.clear();
-      } catch (e) {}
-      window.recaptchaVerifier = null;
-    }
-  }
-}
-
-async function verifyOtpAndChangePassword() {
-  const otp = document.getElementById("resetOtp").value.trim();
-  const newPass = document.getElementById("newPass").value.trim();
-  const phone = document.getElementById("resetPhone").value.trim();
-
-  if (!otp || otp.length !== 6 || !newPass || newPass.length < 6) {
-    alert("Kripya 6-digit OTP aur naya password (min 6 characters) dalein.");
-    return;
-  }
-
-  try {
-    await confirmationResultGlobal.confirm(otp);
-
-    const { error } = await supabaseClient
-      .from('customers')
-      .update({ password: newPass, updated_at: new Date().toISOString() })
-      .eq('phone', phone);
-
-    if (error) {
-      alert("Password save nahi ho paya: " + error.message);
-      return;
-    }
-
-    alert("Password successfully reset ho gaya! Ab naye password se login karein.");
-    closeModal('resetModal');
-    openModal('authModal');
-  } catch (err) {
-    alert("Galat ya expired OTP! Dubara koshish karein.");
-  }
-}
-
-/* =========================================================
-   4. CART & ORDER ACTIONS
+   3. CART & ORDER ACTIONS
 ========================================================= */
 let cart = [];
 
