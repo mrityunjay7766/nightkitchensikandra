@@ -574,6 +574,8 @@ function openResetFlow() {
   openModal('resetModal');
 }
 
+
+  
 async function sendResetOtp() {
   const phone = document.getElementById("resetPhone").value.trim();
   if (!phone || phone.length !== 10) {
@@ -581,26 +583,33 @@ async function sendResetOtp() {
     return;
   }
 
-  // 1. Supabase me phone check karein
-  const { data, error } = await supabaseClient
-    .from('customers')
-    .select('phone')
-    .eq('phone', phone)
-    .single();
+  // 1. Supabase me check karein ki customer registered hai ya nahi
+  if (supabaseClient) {
+    const { data, error } = await supabaseClient
+      .from('customers')
+      .select('phone')
+      .eq('phone', phone)
+      .single();
 
-  if (error || !data) {
-    alert("Yeh mobile number account me registered nahi hai!");
-    return;
+    if (error || !data) {
+      alert("Yeh mobile number account me registered nahi hai!");
+      return;
+    }
   }
 
-  // 2. Safe reCAPTCHA initialization
+  // 2. reCAPTCHA div ko clean karke fresh banayein
+  const recaptchaHolder = document.getElementById("recaptcha-container");
+  if (recaptchaHolder) {
+    recaptchaHolder.innerHTML = "";
+  }
   if (window.recaptchaVerifier) {
     try {
       window.recaptchaVerifier.clear();
-    } catch(e) {}
+    } catch (e) {}
     window.recaptchaVerifier = null;
   }
 
+  // 3. Naya reCAPTCHA initialize karein
   try {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
       'size': 'invisible'
@@ -613,12 +622,12 @@ async function sendResetOtp() {
     document.getElementById("resetStep1").style.display = "none";
     document.getElementById("resetStep2").style.display = "flex";
   } catch (err) {
-    console.error("Firebase Error Details:", err);
+    console.error("Firebase Details:", err);
     alert("SMS send error: " + err.message);
     if (window.recaptchaVerifier) {
       try {
         window.recaptchaVerifier.clear();
-      } catch(e) {}
+      } catch (e) {}
       window.recaptchaVerifier = null;
     }
   }
